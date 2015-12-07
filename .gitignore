@@ -5,6 +5,9 @@ vanilla.lang
 recipe.html
 recipe.json
 
+# Eclipse project
+.project
+
 ### GitHub .gitignore template for Python
 
 # Byte-compiled / optimized / DLL files
