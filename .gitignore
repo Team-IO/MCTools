@@ -1,3 +1,12 @@
+### Project specific
+
+# Default output/input files
+vanilla.lang
+recipe.html
+recipe.json
+
+### GitHub .gitignore template for Python
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
