@@ -1,0 +1,23 @@
+[{
+	"output":"item:taam:part.tank",
+	"output_name":"Tank",
+	"output_count":1,
+	"type":"shaped",
+	"inputs":[
+		["","item:taam:ingot.aluminum",""],
+		["item:taam:ingot.aluminum","","item:taam:ingot.aluminum"],
+		["item:taam:ingot.aluminum","","item:taam:ingot.aluminum"]
+	]
+},
+{
+	"output":"item:taam:part.nozzle",
+	"output_name":"Nozzle",
+	"output_count":1,
+	"type":"shaped",
+	"inputs":[
+		["","item:minecraft:ingotIron",""],
+		["item:minecraft:ingotIron","","item:minecraft:ingotIron"],
+		["","item:minecraft:ingotIron",""]
+	]
+}
+]
