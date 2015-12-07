@@ -3,6 +3,8 @@ Tools for Minecraft &amp; Modding
 
 ## assemble_recipe
 
+Reads recipe specifications from json and outputs html code to display in e.g. a wiki.
+
 	assemble_recipe.py [-i input_file]... [-l lang_file]... [-o output_file] [-d] [-h]
 	
 	-h, --help

@@ -241,6 +241,11 @@ def getName(nSpace, nKind, nName):
 		return search
 
 def usage():
+	print 'assemble_recipe by founderio / Team I/O'
+	print ''
+	print 'Reads recipe specifications from json and outputs html code to display in e.g. a wiki.'
+	print ''
+	print 'Usage:'
 	print 'assemble_recipe.py [-i input_file]... [-l lang_file]... [-o output_file] [-d] [-h]'
 	print ''
 	print '-h, --help'
