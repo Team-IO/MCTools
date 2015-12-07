@@ -1,4 +1,22 @@
 #!/usr/bin/python
+
+# Copyright 2015 Oliver Kahrmann / Team I/O
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+#     http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# See https://team-io.net for more info.
+
+
 import json
 import io
 import re
@@ -22,12 +40,14 @@ def main(argv):
 	_debug = 0
 	global translations
 	translations = dict()
+	global missing_translations
+	missing_translations = set()
 
 	for opt, arg in opts:
 		if opt in ("-h", "--help"):
 			usage()
 			sys.exit()
-		elif opt == '-d':
+		elif opt in ("-d", "--debug"):
 			_debug = 1
 		elif opt in ("-i"):
 			inFiles.append(arg)
@@ -59,6 +79,8 @@ def main(argv):
 			processJson(inFileName, outFile)
 		outFile.write(u'</body>\n</html>')
 
+	print 'Recipe output complete.'
+
 def processJson(inFileName, outFile):
 	print 'Parsing', inFileName
 
@@ -68,7 +90,12 @@ def processJson(inFileName, outFile):
 		for inJson in jsonFileContent:
 			printRecipe(outFile, inJson)
 			count += 1
-	print count, 'recipes processed.\n'
+	print count, 'recipes processed.'
+	print 'Missing', len(missing_translations), 'translations:'
+	for search in missing_translations:
+		print search
+	print ''
+	missing_translations.clear()
 		
 
 def printRecipe(outFile, inJson):
@@ -210,7 +237,36 @@ def getName(nSpace, nKind, nName):
 	if search in translations:
 		return translations[search]
 	else:
+		missing_translations.add(search)
 		return search
+
+def usage():
+	print 'assemble_recipe.py [-i input_file]... [-l lang_file]... [-o output_file] [-d] [-h]'
+	print ''
+	print '-h, --help'
+	print '\tPrints this help text.'
+	print '-d, --debug'
+	print '\tEnables further debug messages.'
+	print '-i'
+	print '\tReads an input file in the json format.'
+	print '\tAn example of the file structure can be seen in recipe.json.example,'
+	print '\twhich contains two recipes.'
+	print '\tThis option is allowed multiple times.'
+	print '\tIf no -i is present, the default filename \'recipe.json\' will be used.'
+	print '-l'
+	print '\tReads a language file (simplified java properties format, item.xyz.name=XYZ Item).'
+	print '\tKeys are expected in the following formats.'
+	print '\tFor namespace \'minecraft\':'
+	print '\t\titem.*.name'
+	print '\t\ttile.*.name'
+	print '\tFor other namespaces:'
+	print '\t\titem.(namespace).*.name'
+	print '\t\ttile.(namespace).*.name'
+	print '\tThis option is allowed multiple times.'
+	print '\tIf a key is not found in any of the loaded files, the key will be used as display name.'
+	print '-o'
+	print '\tDefines the output file to be written to.'
+	print '\tIf no output file is specified, the default filename \'recipe.html\' will be used.'
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
