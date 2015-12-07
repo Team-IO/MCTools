@@ -5,9 +5,9 @@ Tools for Minecraft &amp; Modding
 
 	assemble_recipe.py [-i input_file]... [-l lang_file]... [-o output_file] [-d] [-h]
 	
-	-h
+	-h, --help
 		Prints this help text.
-	-d
+	-d, --debug
 		Enables further debug messages.
 	-i
 		Reads an input file in the json format. An example of the file structure can be seen in recipe.json.example, which contains two recipes.
